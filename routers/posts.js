@@ -9,11 +9,19 @@ const router = express.Router();
 // importo la lista dei posts
 const posts = require("../posts.js");
 
-// Creo poi una rotta /index che restituisca un oggetto json con la lista dei post.
+// Creo una rotta /index che restituisca un oggetto json con la lista dei post.
 router.get("/index", function (req, res) {
 
     // invio la risposta con il json relativo
     res.json(posts);
+})
+
+// Creo una rotta /show/:id che restituisca un singolo post
+router.get("/show/:id", function (req, res) {
+
+    const post = posts[req.params.id];
+    // invio la risposta con il json relativo
+    res.json(post);
 })
 
 // index
