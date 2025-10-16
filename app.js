@@ -2,30 +2,21 @@
 const express = require("express");
 
 // creo una istanza di express
-const index = express();
+const app = express();
 
 // imposto il numero della porta
 const port = 3000;
 
+// importo il modulo del router per i posts
+const postRouter = require("./routers/posts.js")
+
 // uso il middleware static di express per rendere disponibile i file statici
-index.use(express.static('public'));
+app.use(express.static('public'));
 
-// imposto la rotta di index
-index.get("/", (req, res) => {
-    res.send('<h1> Server del mio blog </h1>')
-})
-
-// Creo poi una rotta /bacheca che restituisca un oggetto json con la lista dei post.
-index.get("/bacheca", (req, res) => {
-
-    const posts = require("./posts.js");
-    console.log(posts[1].image);
-
-    // invio la risposta con il json relativo
-    res.json(posts);
-})
+// rotte per i posts
+app.use("/posts", postRouter);
 
 // metto in ascolto il server sulla porta definita
-index.listen(port, () => {
+app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
