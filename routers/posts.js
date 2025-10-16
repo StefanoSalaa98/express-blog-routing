@@ -6,6 +6,18 @@ const router = express.Router();
 
 // Rotte di CRUD sulla risorsa posts
 
+// importo la lista dei posts
+const posts = require("../posts.js");
+
+// Creo poi una rotta /index che restituisca un oggetto json con la lista dei post.
+router.get("/index", function (req, res) {
+
+    const posts = require("../posts.js");
+
+    // invio la risposta con il json relativo
+    res.json(posts);
+})
+
 // index
 router.get('/', function (req, res) {
     res.send('Lista dei posts');
